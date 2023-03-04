@@ -1,0 +1,68 @@
+$z-index: (
+	toast: 100,
+	modal: 80,
+  basket: 60,
+  navigation: 55,
+  filter: 40,
+  search: 30,
+  content: 10,
+);
+
+//TABLE----
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+
+//RATING---------
+.checked {
+	color: gold;
+}
+
+/* Three column layout */
+.side {
+	float: left;
+	width: 10%;
+	margin-top:10px;
+}
+
+.middle {
+	margin-top:10px;
+	float: left;
+	width: 80%;
+}
+
+/* Place text to the right */
+.right {
+	text-align: right;
+}
+
+/* Clear floats after the columns */
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* The bar container */
+.bar-container {
+	width: 100%;
+	background-color: #f1f1f1;
+	text-align: center;
+	color: white;
+}
+
+.bar {
+	height: 18px; background-color: lightseagreen;
+}
