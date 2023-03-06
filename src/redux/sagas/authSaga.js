@@ -3,13 +3,18 @@ import {put, call} from "redux-saga/effects";
 import {
     MAIL_VERIFIED,
     ON_AUTHSTATE_FAIL,
-    ON_AUTHSTATE_SUCCESS,
+    ON_AUTHSTATE_SUCCESS, RESET_PASSWORD,
     SET_AUTH_PERSISTENCE,
-    SIGNIN,
+    SIGNIN, SIGNOUT,
     SIGNUP
 } from "../constants.js";
 import firebase from "../../services/firebase.js";
 import {signInSuccess, signOutSuccess} from "../actions/authActions.js";
+import {clearProfile, setProfile} from "../actions/profileActions.js";
+import {history} from "../../routers/AppRouter";
+import {LOGIN} from "../../routers/routes";
+import defaultAvatar from "../../assets";
+import defaultBanner from "../../assets/defaultBanner.png";
 
 function* handleError(e) {
     const obj = { success: false, type: 'auth', isError: true };
@@ -60,12 +65,28 @@ function* authSaga({type, payload}) {
                     name: payload.name,
                     email: payload.email,
                     role: 'USER',
-                    dateJoined: ref.user.metadata.creationTime || new Date().getTime()
+                    dateJoined: ref.user.metadata.creationTime || new Date().getTime(),
+                    avatar: defaultAvatar[Math.floor(Math.random()*8)],
+                    banner: defaultBanner
                 };
                 yield call(firebase.addUser, ref.user.uid, user);
+                yield put(setProfile(user));
                 yield put(setAuthenticating(false));
             } catch (e) {
                 yield handleError(e);
+            }
+            break;
+        }
+        case SIGNOUT:{
+            try {
+                yield initRequest();
+                yield call(firebase.signOut);
+                yield put(clearProfile());
+                yield put(signOutSuccess());
+                yield put(setAuthenticating(false));
+                yield call(history.push, LOGIN);
+            } catch (e) {
+                console.log(e);
             }
             break;
         }
@@ -73,6 +94,8 @@ function* authSaga({type, payload}) {
             const snapshot = yield call(firebase.getUser, payload.uid);
             if (snapshot.data()) {
                 const user = snapshot.data();
+
+                yield put(setProfile(user));
                 yield put(signInSuccess({
                     id: payload.uid,
                     role: user.role,
@@ -107,6 +130,21 @@ function* authSaga({type, payload}) {
                 yield call(firebase.emailVerified);
             } catch (e) {
                 console.log(e);
+            }
+            break;
+        }
+        case RESET_PASSWORD:{
+            try {
+                yield initRequest();
+                yield call(firebase.passwordReset, payload);
+                yield put(setAuthStatus({
+                    success: true,
+                    type: 'reset',
+                    message: 'Email xác nhận thay đổi mật khẩu vừa được gửi đi ...'
+                }));
+                yield put(setAuthenticating(false));
+            } catch (e) {
+                handleError({code: 'auth/reset-password-error'});
             }
             break;
         }

@@ -30,6 +30,8 @@
     width: 15rem;
     height: inherit;
     object-fit: contain;
+    -webkit-filter: drop-shadow(3px 3px 3px dimgrey);
+    filter: drop-shadow(3px 3px 3px dimgrey);
   }
 
   .logo a {

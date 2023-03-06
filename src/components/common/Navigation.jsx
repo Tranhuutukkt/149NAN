@@ -3,11 +3,12 @@ import {Link, NavLink, useLocation} from "react-router-dom";
 import logo from "../../assets/logoWordmark.png";
 import * as ROUTE from "../../routers/routes";
 import {useSelector} from "react-redux";
+import UserAvatar from "./UserAvatar.jsx";
 
 
 const Navigation = () => {
     const navbar = useRef(null);
-    const pathname = useLocation();
+    const {pathname} = useLocation();
 
     const store = useSelector((state) => ({
         user: state.auth,
@@ -46,7 +47,23 @@ const Navigation = () => {
                 }
             </ul>
             <ul className="navigation-menu">
-                <li className="navigation-menu-item">User Avatar</li>
+                {store.user? (
+                    <li className='navigation-menu-item'>
+                        <UserAvatar/>
+                    </li>
+                ) : (
+                    <li className='navigation-action'>
+                        {pathname !== ROUTE.LOGIN && (
+                            <Link
+                                className='button button-small button-muted margin-left-s'
+                                onClick={onClickLink}
+                                to={ROUTE.LOGIN}
+                            >
+                                Đăng nhập
+                            </Link>
+                        )}
+                    </li>
+                )}
             </ul>
         </nav>
     );

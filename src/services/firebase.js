@@ -132,6 +132,14 @@ class Firebase {
         });
     }
 
+    //IMAGE
+    storeImage = async (id, folder, imageFile) => {
+        const snapshot = await this.storage.ref(folder).child(id).put(imageFile);
+        const downloadURL = await snapshot.ref.getDownloadURL();
+
+        return downloadURL;
+    };
+
 
 }
 

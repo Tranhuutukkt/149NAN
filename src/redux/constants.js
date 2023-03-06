@@ -1,3 +1,4 @@
+//AUTH
 export const SIGNIN = 'SIGNIN';
 export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
 export const SIGNUP = 'SIGNUP';
@@ -16,3 +17,9 @@ export const SET_REQUEST_STATUS = 'SET_REQUEST_STATUS';
 export const GET_ALL_USER = 'GET_ALL_USER';
 export const GET_ALL_USER_SUCCESS = 'GET_ALL_USER_SUCCESS';
 export const MAIL_VERIFIED = 'MAIL_VERIFIED';
+//PROFILE
+export const UPDATE_EMAIL = 'UPDATE_EMAIL';
+export const SET_PROFILE = 'SET_PROFILE';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const UPDATE_PROFILE_SUCCESS = 'UPDATE_PROFILE_SUCCESS';
+export const CLEAR_PROFILE = 'CLEAR_PROFILE';

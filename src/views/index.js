@@ -5,3 +5,4 @@ export {default as RegisterStep3} from "./auth/signup/step3";
 export {default as EmailVerified} from "./auth/emailVerified";
 export {default as Home} from "./home/index.jsx";
 export {default as PageNotFound} from "./error/PageNotFound";
+export {default as ResetPassword} from './auth/resetPassword';

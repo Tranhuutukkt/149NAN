@@ -7,10 +7,8 @@ import {signIn} from "../../../redux/actions/authActions.js";
 import {LoadingOutlined} from "@ant-design/icons";
 import {Field, Form, Formik} from "formik";
 import CustomInput from "../../../components/formik/CustomInput.jsx";
-import PropType from "prop-types";
-import {withRouter} from "react-router-dom";
-import {SIGNUP} from "../../../redux/constants.js";
-import {HOME, SIGNUP_STEP1} from "../../../routers/routes.js";
+import {RESET_PASSWORD, SIGNUP_STEP1} from "../../../routers/routes.js";
+import {Link} from "react-router-dom";
 
 const SignInSchema = Yup.object().shape({
     email: Yup.string()
@@ -107,13 +105,13 @@ const SignIn = ({ history }) => {
                                             </div>
                                             <br />
                                             <div className="auth-field auth-action">
-                                                {/*<Link*/}
-                                                {/*    onClick={onClickLink}*/}
-                                                {/*    style={{ textDecoration: 'underline' }}*/}
-                                                {/*    to={FORGOT_PASSWORD}*/}
-                                                {/*>*/}
-                                                {/*    <span>Forgot password?</span>*/}
-                                                {/*</Link>*/}
+                                                <Link
+                                                    onClick={onClickLink}
+                                                    style={{ textDecoration: 'underline' }}
+                                                    to={RESET_PASSWORD}
+                                                >
+                                                    <span>Quên mật khẩu?</span>
+                                                </Link>
                                                 <button
                                                     className="button auth-button"
                                                     disabled={isAuthenticating}

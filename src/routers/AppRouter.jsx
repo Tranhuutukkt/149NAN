@@ -44,6 +44,11 @@ const AppRouter = () => (
                     exact
                     path={ROUTES.EMAIL_VERIFIED}
                 />
+                <Route
+                    component={view.ResetPassword}
+                    exact
+                    path={ROUTES.RESET_PASSWORD}
+                />
                 <PublicRoute component={view.PageNotFound}/>
             </Switch>
             <Footer/>

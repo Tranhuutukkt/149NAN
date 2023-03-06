@@ -25,7 +25,7 @@
   overflow: hidden;
   margin-left: 10px;
   position: relative;
-  background: $border-color-focus;
+  background: azure;
 
   &:after {
     content: attr('data-alt');
